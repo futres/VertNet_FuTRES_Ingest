@@ -3,7 +3,20 @@ Functions to process measurementMethod in VertNet Mammal data
 
 """
 
+#===========================================================================================================================================
+
 import numpy as np
+import pandas as pd
+
+#===========================================================================================================================================
+
+# List of desired traits
+trait_name_list = ["body_mass","ear_length","hind_foot_length",
+                "tail_length","total_length"]
+
+method_list = ["measurementMethod_" + x for x in trait_name_list]
+
+#===========================================================================================================================================
 
 def trait_method(trait, data):
     """
@@ -23,15 +36,12 @@ def trait_method(trait, data):
     data[column][estimated_filter] = "Extracted with Traiter ; estimated value"
     data[column][estimated_filter & inferred_filter] = "Extracted with Traiter ; estimated value; inferred value"
 
+    return data
+
 def create_uni_mm(data):
     """
     Creates a unique measurementMethod column for each desired trait
     """
-    # List of desired traits
-    trait_name_list = ["body_mass","ear_length","hind_foot_length",
-                    "tail_length","total_length"]
-
-    method_list = ["measurementMethod_" + x for x in trait_name_list]
     data = data.join(pd.DataFrame(index = data.index, columns= method_list))
 
     [trait_method(x, data) for x in trait_name_list]
@@ -77,24 +87,27 @@ def create_uni_mm(data):
                     'tail_length.units',
                     'total_length.units'])
 
+    return data
 
-def method_add(trait,ind):
-    if trait == "body_mass_temp":
-        return longVers["measurementMethod_body_mass"][ind]
-    elif trait == "ear_length_temp":
-        return longVers["measurementMethod_ear_length"][ind]
-    elif trait == "hind_foot_length_temp":
-        return longVers["measurementMethod_hind_foot_length"][ind]
-    elif trait == "tail_length_temp":
-        return longVers["measurementMethod_tail_length"][ind]
-    elif trait == "total_length_temp":
-        return longVers["measurementMethod_total_length"][ind]
 
 def mm_processing(data):
     """
     Pull corresponding column value in measurement_method etc and append it to offical measurementMethod
     
     """
+
+    def method_add(trait,ind):
+        if trait == "body_mass_temp":
+            return data["measurementMethod_body_mass"][ind]
+        elif trait == "ear_length_temp":
+            return data["measurementMethod_ear_length"][ind]
+        elif trait == "hind_foot_length_temp":
+            return data["measurementMethod_hind_foot_length"][ind]
+        elif trait == "tail_length_temp":
+            return data["measurementMethod_tail_length"][ind]
+        elif trait == "total_length_temp":
+            return data["measurementMethod_total_length"][ind]
+
     data = data.assign(measurementMethod = "")
 
     data['ind'] = np.arange(len(data))

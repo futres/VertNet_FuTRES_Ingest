@@ -15,3 +15,5 @@ def save_file(data):
         new=i+1
         chunks[i].to_csv('../Mapped_Data/FuTRES_Mammals_VertNet_Global_Modern_'+ str(new) +'.csv', index=False)
         print("mapped_data",i, " done")
+
+        

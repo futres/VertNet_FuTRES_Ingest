@@ -3,6 +3,13 @@ Functions for assigning IDs within VertNet processing Script
 
 """
 
+#===========================================================================================================================================
+
+import uuid
+import numpy as np 
+
+#===========================================================================================================================================
+
 def assign_indivdual_ID(data):
     """
     Add individualID and populate with UUID

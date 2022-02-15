@@ -3,6 +3,8 @@ Function to clean lifestage column in Vertnet Mammal Data
 
 """
 
+#===========================================================================================================================================
+
 def clean_lifestage_column(data):
     """
     Clean lifestage column 

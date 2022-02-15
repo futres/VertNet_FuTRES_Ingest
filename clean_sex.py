@@ -3,6 +3,8 @@ Function to clean sex column in VertNet Mammal data
 
 """
 
+#===========================================================================================================================================
+
 def clean_sex_column(data):
     """
     Clean sex column

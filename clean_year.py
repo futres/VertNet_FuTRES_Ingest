@@ -3,11 +3,21 @@ Functions for cleaning the yearCollected data in the VertNet dataset
 
 """
 
+#===========================================================================================================================================
+
+import re 
+
+#===========================================================================================================================================
+
+# Rouge items found in date column to filter out
 date_filter = """IV|0000|September|<|NW|latter|unknown|(MCZ)|(MSU)|present|
                  and|;|&|mainly|between|Between|BETWEEN|OR|Unknown|UNKNOWN|
                  #|TO|\?|\'|----|19--|No Date|\,|\d{4}-\d{4}|(/n) /d|\d{4}[s]|
                  \d{4}\'[S]|1075-07-29|975-07-17|2088|9999|0201|1197|
                  1260|4560|1024|1119|1192|1072|1186|2364"""
+
+#===========================================================================================================================================
+
 
 def year_search(year):
     """
@@ -25,6 +35,7 @@ def year_cleaner_front(year):
 
     """
     cleaned_year = year[len(year)-4:len(year)]
+    
     return cleaned_year
 
 def year_cleaner_back(year):
@@ -33,6 +44,7 @@ def year_cleaner_back(year):
 
     """
     cleaned_year = year[0:4]
+
     return cleaned_year
 
 def clean_year_collected(data):
